@@ -1,27 +1,48 @@
 package dev.senzalla.implementacao_backend.model.endereco.mapper;
 
-import dev.senzalla.implementacao_backend.core.contracts.InterfaceCollectionMapper;
 import dev.senzalla.implementacao_backend.core.contracts.InterfaceEntityMapper;
+import dev.senzalla.implementacao_backend.model.cidade.mapper.CidadeMapper;
 import dev.senzalla.implementacao_backend.model.endereco.entity.Endereco;
 import dev.senzalla.implementacao_backend.model.endereco.module.EnderecoDto;
 import dev.senzalla.implementacao_backend.model.endereco.module.EnderecoForm;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-import java.util.List;
+@Component
+@RequiredArgsConstructor
+public class EnderecoMapper implements InterfaceEntityMapper<Endereco, EnderecoForm, EnderecoDto> {
 
-public class EnderecoMapper implements InterfaceEntityMapper<Endereco, EnderecoForm, EnderecoDto>, InterfaceCollectionMapper<Endereco,EnderecoDto> {
+    private final CidadeMapper cidadeMapper;
+
     @Override
-    public Endereco toEntity(EnderecoForm dto) {
-        return null;
+    public Endereco toEntity(EnderecoForm form) {
+        if (form == null) {
+            return null;
+        }
+
+        Endereco entity = new Endereco();
+        entity.setEndTipoLogradouro(form.endTipoLogradouro());
+        entity.setEndLogradouro(form.endLogradouro());
+        entity.setEndNumero(form.endNumero());
+        entity.setEndBairro(form.endBairro());
+        entity.setCid(cidadeMapper.toEntity(form.cid()));
+
+        return entity;
     }
 
     @Override
     public EnderecoDto toDto(Endereco entity) {
-        return null;
-    }
+        if (entity == null) {
+            return null;
+        }
 
-    @Override
-    public Collection<EnderecoDto> toDto(Iterable<Endereco> entities) {
-        return List.of();
+        return new EnderecoDto(
+                entity.getId(),
+                entity.getEndTipoLogradouro(),
+                entity.getEndLogradouro(),
+                entity.getEndNumero(),
+                entity.getEndBairro(),
+                cidadeMapper.toDto(entity.getCid())
+        );
     }
 }

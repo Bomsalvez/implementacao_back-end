@@ -1,0 +1,18 @@
+Passo a Passo para Implementação
+Autenticação e Autorização:
+Use Spring Security para implementar autenticação e autorização.
+Configure o CORS para permitir apenas o domínio específico.
+Configure a expiração de sessão para 5 minutos com possibilidade de renovação.
+CRUD e Endpoints:
+Implemente CRUD para Servidor Efetivo, Servidor Temporário, Unidade e Lotação.
+Crie endpoints para consultar servidores efetivos por unid_id e endereços funcionais por nome.
+Paginação:
+Adicione paginação em todas as consultas usando Pageable.
+Upload e Recuperação de Imagens:
+Configure o Min.io para upload de imagens.
+Implemente a geração de links temporários para recuperação de imagens.
+Docker Compose:
+Certifique-se de que todos os contêineres estão configurados no docker-compose.yml.
+Documentação e Publicação:
+Crie um arquivo README.md com instruções de execução e teste.
+Publique o projeto no GitHub.

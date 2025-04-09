@@ -1,18 +1,12 @@
 package dev.senzalla.implementacao_backend.model.servidor.efetivo.module;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class ServidorEfetivoFotoDTO {
-    private Integer id;
-    private String nome;
-    private Integer idade;
-    private String unidadeNome;
-    private List<String> urlsFotos;
+public record ServidorEfetivoFotoDTO(
+        Integer id,
+        String nome,
+        Integer idade,
+        String unidadeNome,
+        List<String> urlsFotos
+) {
 } 

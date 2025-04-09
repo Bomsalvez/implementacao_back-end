@@ -8,13 +8,43 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CidadeMapper implements InterfaceEntityMapper<Cidade, CidadeForm, CidadeDto> {
+
     @Override
-    public Cidade toEntity(CidadeForm dto) {
-        return null;
+    public Cidade toEntity(CidadeForm form) {
+        if (form == null) {
+            return null;
+        }
+
+        Cidade entity = new Cidade();
+        entity.setCidNome(form.cidNome());
+        entity.setCidUf(form.cidUf());
+
+        return entity;
     }
 
     @Override
     public CidadeDto toDto(Cidade entity) {
-        return null;
+        if (entity == null) {
+            return null;
+        }
+
+        return new CidadeDto(
+                entity.getId(),
+                entity.getCidNome(),
+                entity.getCidUf()
+        );
+    }
+
+    public Cidade toEntity(CidadeDto dto) {
+        if (dto == null) {
+            return null;
+        }
+
+        Cidade entity = new Cidade();
+        entity.setId(dto.id());
+        entity.setCidNome(dto.cidNome());
+        entity.setCidUf(dto.cidUf());
+
+        return entity;
     }
 }

@@ -1,6 +1,6 @@
 package dev.senzalla.implementacao_backend.model.unidade.module;
 
-import dev.senzalla.implementacao_backend.model.endereco.module.EnderecoDto;
+import dev.senzalla.implementacao_backend.model.endereco.module.EnderecoForm;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public record UnidadeForm(
         @NotNull @Size(max = 200) String unidNome,
-        @NotNull @Size(max = 20) String unidSigla,
-        @NotNull List<EnderecoDto> enderecos
+        @NotNull @Size(max = 10) String unidSigla,
+        List<EnderecoForm> enderecos
 ) implements Serializable {
 }

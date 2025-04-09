@@ -1,4 +1,4 @@
-package dev.senzalla.implementacao_backend.model.pessoa.dto;
+package dev.senzalla.implementacao_backend.model.pessoa.module;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

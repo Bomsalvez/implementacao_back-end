@@ -1,68 +1,73 @@
 package dev.senzalla.implementacao_backend.model.unidade.mapper;
 
-import dev.senzalla.implementacao_backend.model.endereco.dto.EnderecoDTO;
-import dev.senzalla.implementacao_backend.model.endereco.entity.Endereco;
-import dev.senzalla.implementacao_backend.model.unidade.dto.UnidadeDTO;
+import dev.senzalla.implementacao_backend.core.contracts.InterfaceCollectionMapper;
+import dev.senzalla.implementacao_backend.core.contracts.InterfaceEntityMapper;
+import dev.senzalla.implementacao_backend.model.endereco.mapper.EnderecoMapper;
 import dev.senzalla.implementacao_backend.model.unidade.entity.Unidade;
+import dev.senzalla.implementacao_backend.model.unidade.module.UnidadeDto;
+import dev.senzalla.implementacao_backend.model.unidade.module.UnidadeForm;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class UnidadeMapper {
+@AllArgsConstructor
+public class UnidadeMapper implements InterfaceEntityMapper<Unidade, UnidadeForm, UnidadeDto> , InterfaceCollectionMapper<Unidade, UnidadeDto> {
+    private final EnderecoMapper enderecoMapper;
 
-    public UnidadeDTO toDTO(Unidade unidade) {
+    @Override
+    public UnidadeDto toDto(Unidade unidade) {
         if (unidade == null) {
             return null;
         }
-        
-        UnidadeDTO dto = new UnidadeDTO();
-        dto.setId(unidade.getId());
-        dto.setNome(unidade.getUnidNome());
-        dto.setSigla(unidade.getUnidSigla());
-        
-        if (unidade.getEnderecos() != null) {
-            dto.setEnderecos(unidade.getEnderecos().stream()
-                    .map(this::enderecoToDTO)
-                    .collect(Collectors.toList()));
-        }
-        
-        return dto;
+
+        var enderecos = unidade.getEnderecos() != null
+            ? unidade.getEnderecos().stream()
+                .map(enderecoMapper::toDto)
+                .collect(Collectors.toList())
+            : null;
+
+        return new UnidadeDto(
+            unidade.getId(),
+            unidade.getUnidNome(),
+            unidade.getUnidSigla(),
+            enderecos
+        );
     }
-    
-    public Unidade toEntity(UnidadeDTO dto) {
+
+    @Override
+    public Unidade toEntity(UnidadeForm dto) {
         if (dto == null) {
             return null;
         }
-        
+
         Unidade unidade = new Unidade();
-        unidade.setId(dto.getId());
-        unidade.setUnidNome(dto.getNome());
-        unidade.setUnidSigla(dto.getSigla());
-        
-        // Endereços são gerenciados separadamente
-        
+        unidade.setUnidNome(dto.unidNome());
+        unidade.setUnidSigla(dto.unidSigla());
+
+
         return unidade;
     }
-    
-    private EnderecoDTO enderecoToDTO(Endereco endereco) {
-        if (endereco == null) {
+
+
+    @Override
+    public Collection<UnidadeDto> toDto(Iterable<Unidade> entities) {
+        return List.of();
+    }
+
+    public Unidade toEntity(UnidadeDto dto) {
+        if (dto == null) {
             return null;
         }
-        
-        EnderecoDTO dto = new EnderecoDTO();
-        dto.setId(endereco.getId());
-        dto.setTipoLogradouro(endereco.getEndTipoLogradouro());
-        dto.setLogradouro(endereco.getEndLogradouro());
-        dto.setNumero(endereco.getEndNumero());
-        dto.setBairro(endereco.getEndBairro());
-        
-        if (endereco.getCid() != null) {
-            dto.setCidadeId(endereco.getCid().getId());
-            dto.setCidadeNome(endereco.getCid().getCidNome());
-            dto.setUf(endereco.getCid().getCidUf());
-        }
-        
-        return dto;
+
+        Unidade unidade = new Unidade();
+        unidade.setId(dto.id());
+        unidade.setUnidNome(dto.unidNome());
+        unidade.setUnidSigla(dto.unidSigla());
+
+        return unidade;
     }
 }

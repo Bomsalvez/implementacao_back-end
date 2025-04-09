@@ -1,7 +1,6 @@
 package dev.senzalla.implementacao_backend.model.servidor.temporario.module;
 
 import dev.senzalla.implementacao_backend.model.pessoa.module.PessoaDto;
-import dev.senzalla.implementacao_backend.model.servidor.temporario.entity.ServidorTemporario;
 
 import java.io.Serializable;
 import java.time.LocalDate;

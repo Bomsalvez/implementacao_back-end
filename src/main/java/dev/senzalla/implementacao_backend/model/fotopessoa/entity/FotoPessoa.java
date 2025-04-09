@@ -2,44 +2,33 @@ package dev.senzalla.implementacao_backend.model.fotopessoa.entity;
 
 import dev.senzalla.implementacao_backend.model.pessoa.entity.Pessoa;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * Entidade que representa uma foto associada a uma pessoa
  */
+@Entity
+@Table(name = "foto_pessoa")
 @Getter
 @Setter
-@Entity
-@Table(name = "foto_pessoa", schema = "public", indexes = {
-        @Index(name = "idx_fotopessoa_pessoa", columnList = "pes_id")
-})
 public class FotoPessoa {
     @Id
-    @ColumnDefault("nextval('seq_fotopessoa_id')")
-    @Column(name = "fp_id", nullable = false)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "pes_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "pessoa_id")
     private Pessoa pessoa;
 
-    @Size(max = 255)
-    @NotNull
-    @Column(name = "fp_url", nullable = false)
+    @Column(name = "fp_url")
     private String fpUrl;
 
-    @CreationTimestamp
-    @Column(name = "fp_data_cadastro", nullable = false)
-    private LocalDateTime fpDataCadastro;
-
     @Column(name = "fp_principal")
-    private Boolean fpPrincipal = false;
+    private boolean fpPrincipal;
+
+    @Column(name = "fp_data")
+    private LocalDate fpData;
 }
