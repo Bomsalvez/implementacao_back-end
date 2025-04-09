@@ -1,9 +1,23 @@
-# Implementação Back-End - Senzalla
+# Implementação Back-End
 
-## Dados de Inscrição
-- **Nome**: Senzalla
-- **Email**: senzalla@senzalla.com.br
-- **Telefone**: (11) 99999-9999
+## Informações Pessoais:
+
+- **Nome**: Carlos Henrique de Freitas Ribeiro
+- **CPF**: 116.939.316-05
+- **RG**: 18190772
+- **Data de Nascimento**: 13/07/1993
+- **Gênero**: Masculino
+- **PCD**: Não
+- **Escolaridade**: Ensino Superior Completo
+- **E-mail**: bomsalvez@gmail.com
+- **Celular**: (65) 99230-0223
+- **Endereço**: Rua Paineiras, 64
+- **Complemento**: Ap, bloco...
+- **Bairro**: Praeiro
+- **Estado**: Mato Grosso-MT
+- **Cidade**: Cuiabá
+- **CEP**: 78070-520
+- **Cargo Pretendido**: Desenvolvedor Java Pleno
 
 ## Descrição do Projeto
 Este projeto é uma implementação back-end em Java utilizando Spring Boot para gerenciamento de fotos de pessoas. A solução utiliza:
@@ -26,13 +40,6 @@ cd implementacao_back-end
 ```
 
 2. Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
-```env
-POSTGRES_DB=senzalla_db
-POSTGRES_USER=senzalla
-POSTGRES_PASSWORD=senzalla123
-MINIO_ACCESS_KEY=seu-access-key
-MINIO_SECRET_KEY=seu-secret-key
-```
 
 3. Configure o arquivo `application.properties` com as credenciais do MinIO:
 ```properties
@@ -63,8 +70,8 @@ A aplicação estará disponível em `http://localhost:8080`
 
 #### FotoPessoa
 - `GET /api/fotos-pessoa` - Lista todas as fotos
-- `GET /api/fotos-pessoa/{id}` - Busca uma foto específica
-- `POST /api/fotos-pessoa` - Salva uma nova foto
+- `GET /api/fotos-pessoa/{id}` - Busca uma foto específica e retorna um link temporário
+- `POST /api/fotos-pessoa` - Salva uma nova foto (aceita MultipartFile)
 - `DELETE /api/fotos-pessoa/{id}` - Remove uma foto
 
 #### Lotação
@@ -86,11 +93,8 @@ A aplicação estará disponível em `http://localhost:8080`
 1. Criar uma nova foto:
 ```bash
 curl -X POST http://localhost:8080/api/fotos-pessoa \
-  -H "Content-Type: application/json" \
-  -d '{
-    "nomeFoto": "foto-teste.jpg",
-    "urlFoto": "http://minio:9000/fotos-servidores/foto-teste.jpg"
-  }'
+  -F "file=@caminho/para/sua/foto.jpg" \
+  -F "id=123"
 ```
 
 2. Listar todas as fotos:
@@ -98,27 +102,16 @@ curl -X POST http://localhost:8080/api/fotos-pessoa \
 curl -X GET http://localhost:8080/api/fotos-pessoa
 ```
 
+3. Obter link temporário para uma foto específica:
+```bash
+curl -X GET http://localhost:8080/api/fotos-pessoa/123
+```
 ## Estrutura do Projeto
 
+## Acessando a Documentação da API
+
+A documentação da API pode ser acessada através do Swagger na seguinte URL:
+
+```http request
+http://localhost:8080/swagger-ui.html
 ```
-src/main/java/dev/senzalla/implementacao_backend/
-├── config/                 # Configurações do Spring
-├── model/                  # Entidades e camadas de negócio
-│   ├── fotopessoa/        # Módulo de fotos de pessoas
-│   ├── lotacao/           # Módulo de lotações
-│   └── lotacaofoto/       # Módulo de fotos de lotação
-├── service/               # Serviços compartilhados
-│   └── storage/          # Serviço de armazenamento MinIO
-└── ImplementacaoBackEndApplication.java
-```
-
-## Observações Importantes
-
-- O MinIO está configurado para rodar na porta 9000
-- O PostgreSQL está configurado para rodar na porta 5432
-- As credenciais do MinIO devem ser configuradas no arquivo `.env` e `application.properties`
-- O bucket `fotos-servidores` será criado automaticamente na primeira execução
-
-## Suporte
-
-Para suporte ou dúvidas, entre em contato através do email: senzalla@senzalla.com.br 
