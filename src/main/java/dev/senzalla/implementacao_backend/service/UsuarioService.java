@@ -1,4 +1,4 @@
-package dev.senzalla.implementacao_backend.service.usuario;
+package dev.senzalla.implementacao_backend.service;
 
 import dev.senzalla.implementacao_backend.model.usuario.entity.Usuario;
 import dev.senzalla.implementacao_backend.repository.UsuarioRepository;

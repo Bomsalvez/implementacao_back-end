@@ -1,13 +1,12 @@
-package dev.senzalla.implementacao_backend.service.lotacao;
+package dev.senzalla.implementacao_backend.service;
 
-        import dev.senzalla.implementacao_backend.core.exception.FotoNaoEncontradaException;
-        import dev.senzalla.implementacao_backend.core.exception.ServidorNaoEncontradoException;
+        import dev.senzalla.implementacao_backend.config.exception.FotoNaoEncontradaException;
+        import dev.senzalla.implementacao_backend.config.exception.ServidorNaoEncontradoException;
         import dev.senzalla.implementacao_backend.model.fotopessoa.entity.FotoPessoa;
         import dev.senzalla.implementacao_backend.model.lotacao.entity.Lotacao;
         import dev.senzalla.implementacao_backend.model.lotacao.module.FotoUploadDto;
         import dev.senzalla.implementacao_backend.repository.FotoPessoaRepository;
         import dev.senzalla.implementacao_backend.repository.LotacaoRepository;
-        import dev.senzalla.implementacao_backend.service.storage.MinioService;
         import lombok.RequiredArgsConstructor;
         import org.springframework.stereotype.Service;
         import org.springframework.transaction.annotation.Transactional;

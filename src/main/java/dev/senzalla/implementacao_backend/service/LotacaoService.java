@@ -1,8 +1,6 @@
-package dev.senzalla.implementacao_backend.service.lotacao;
+package dev.senzalla.implementacao_backend.service;
 
-import dev.senzalla.implementacao_backend.core.contracts.InterfaceService;
 import dev.senzalla.implementacao_backend.model.endereco.module.EnderecoDto;
-import dev.senzalla.implementacao_backend.model.fotopessoa.service.FotoPessoaService;
 import dev.senzalla.implementacao_backend.model.lotacao.entity.Lotacao;
 import dev.senzalla.implementacao_backend.model.lotacao.mapper.LotacaoMapper;
 import dev.senzalla.implementacao_backend.model.lotacao.module.EnderecoFuncionalDto;
@@ -22,13 +20,12 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class LotacaoService implements InterfaceService<Lotacao, LotacaoForm, LotacaoDto> {
+public class LotacaoService  {
 
     private final LotacaoRepository repository;
     private final LotacaoMapper mapper;
     private final FotoPessoaService fotoPessoaService;
 
-    @Override
     @Transactional
     public LotacaoDto create(LotacaoForm form) {
         Lotacao entity = mapper.toEntity(form);
@@ -36,7 +33,6 @@ public class LotacaoService implements InterfaceService<Lotacao, LotacaoForm, Lo
         return mapper.toDto(entity);
     }
 
-    @Override
     @Transactional(readOnly = true)
     public LotacaoDto findById(Integer id) {
         return repository.findById(id)
@@ -44,14 +40,12 @@ public class LotacaoService implements InterfaceService<Lotacao, LotacaoForm, Lo
                 .orElse(null);
     }
 
-    @Override
     @Transactional(readOnly = true)
     public Page<LotacaoDto> findAll(Pageable pageable) {
         return repository.findAll(pageable)
                 .map(mapper::toDto);
     }
 
-    @Override
     @Transactional
     public LotacaoDto update(Integer id, LotacaoForm form) {
         return repository.findById(id)
@@ -64,7 +58,6 @@ public class LotacaoService implements InterfaceService<Lotacao, LotacaoForm, Lo
                 .orElse(null);
     }
 
-    @Override
     @Transactional
     public void delete(Integer id) {
         repository.deleteById(id);
@@ -78,7 +71,7 @@ public class LotacaoService implements InterfaceService<Lotacao, LotacaoForm, Lo
             String nomeServidor = lotacao.getPes().getPesNome();
             Integer idade = calcularIdade(lotacao.getPes().getPesDataNascimento());
             String nomeUnidade = lotacao.getUnid().getUnidNome();
-            String fotografia = fotoPessoaService.buscarFotoPorId(lotacao.getPes().getId());
+            String fotografia = fotoPessoaService.buscarFotoPorId(Long.valueOf(lotacao.getPes().getId()));
 
             return new LotacaoServidorDto(
                 nomeServidor,

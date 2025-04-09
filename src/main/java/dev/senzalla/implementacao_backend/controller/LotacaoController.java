@@ -5,8 +5,8 @@ import dev.senzalla.implementacao_backend.model.lotacao.module.FotoUploadDto;
 import dev.senzalla.implementacao_backend.model.lotacao.module.LotacaoDto;
 import dev.senzalla.implementacao_backend.model.lotacao.module.LotacaoForm;
 import dev.senzalla.implementacao_backend.model.lotacao.module.LotacaoServidorDto;
-import dev.senzalla.implementacao_backend.service.lotacao.LotacaoFotoService;
-import dev.senzalla.implementacao_backend.service.lotacao.LotacaoService;
+import dev.senzalla.implementacao_backend.service.LotacaoFotoService;
+import dev.senzalla.implementacao_backend.service.LotacaoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -14,8 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/lotacoes")

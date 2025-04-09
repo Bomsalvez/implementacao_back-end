@@ -1,15 +1,14 @@
 package dev.senzalla.implementacao_backend.model.cidade.mapper;
 
-import dev.senzalla.implementacao_backend.core.contracts.InterfaceEntityMapper;
 import dev.senzalla.implementacao_backend.model.cidade.entity.Cidade;
 import dev.senzalla.implementacao_backend.model.cidade.module.CidadeDto;
 import dev.senzalla.implementacao_backend.model.cidade.module.CidadeForm;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CidadeMapper implements InterfaceEntityMapper<Cidade, CidadeForm, CidadeDto> {
+public class CidadeMapper  {
 
-    @Override
+   
     public Cidade toEntity(CidadeForm form) {
         if (form == null) {
             return null;
@@ -22,7 +21,7 @@ public class CidadeMapper implements InterfaceEntityMapper<Cidade, CidadeForm, C
         return entity;
     }
 
-    @Override
+   
     public CidadeDto toDto(Cidade entity) {
         if (entity == null) {
             return null;

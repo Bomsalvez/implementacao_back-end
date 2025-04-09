@@ -1,6 +1,5 @@
-package dev.senzalla.implementacao_backend.config;
+package dev.senzalla.implementacao_backend.config.security;
 
-import dev.senzalla.implementacao_backend.core.security.JwtAuthorizationFilter;
 import dev.senzalla.implementacao_backend.service.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,12 +30,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Value("${app.allowed-origins:http://localhost:8081,http://localhost:3000}")
-    private String allowedOrigins;
+
     
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
+    private final CorsConfig corsConfig;
 
 
     /**
@@ -66,29 +65,7 @@ public class SecurityConfig {
 
 
 
-    /**
-     * Configura a fonte de configuração CORS
-     */
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = createCorsConfiguration();
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
 
-    /**
-     * Cria a configuração CORS com base nas origens permitidas
-     */
-    private CorsConfiguration createCorsConfiguration() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of(allowedOrigins.split(",")));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowCredentials(true);
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
-        configuration.setMaxAge(300L); // 5 minutos
-        return configuration;
-    }
 
     /**
      * Configura a autenticação com filtros JWT
@@ -101,7 +78,7 @@ public class SecurityConfig {
      * Configura CORS e CSRF
      */
     private void configureCorsAndCsrf(HttpSecurity http) throws Exception {
-        http.cors(corsConfigurer -> corsConfigurationSource());
+        http.cors(corsConfigurer -> corsConfig.corsConfigurationSource());
         http.csrf(AbstractHttpConfigurer::disable);
     }
     

@@ -1,7 +1,5 @@
-package dev.senzalla.implementacao_backend.service.servidor.efetivo;
+package dev.senzalla.implementacao_backend.service;
 
-import dev.senzalla.implementacao_backend.core.contracts.InterfaceService;
-import dev.senzalla.implementacao_backend.model.pessoa.service.PessoaService;
 import dev.senzalla.implementacao_backend.model.servidor.efetivo.entity.ServidorEfetivo;
 import dev.senzalla.implementacao_backend.model.servidor.efetivo.mapper.ServidorEfetivoMapper;
 import dev.senzalla.implementacao_backend.model.servidor.efetivo.module.ServidorEfetivoDto;
@@ -15,13 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class ServidorEfetivoService implements InterfaceService<ServidorEfetivo, ServidorEfetivoForm, ServidorEfetivoDto> {
+public class ServidorEfetivoService  {
 
     private final ServidorEfetivoRepository repository;
     private final ServidorEfetivoMapper mapper;
     private final PessoaService pessoaService;
 
-    @Override
+   
     @Transactional
     public ServidorEfetivoDto create(ServidorEfetivoForm form) {
         ServidorEfetivo entity = mapper.toEntity(form);
@@ -29,7 +27,7 @@ public class ServidorEfetivoService implements InterfaceService<ServidorEfetivo,
         return mapper.toDto(entity);
     }
 
-    @Override
+   
     @Transactional(readOnly = true)
     public ServidorEfetivoDto findById(Integer id) {
         return repository.findById(id)
@@ -37,14 +35,14 @@ public class ServidorEfetivoService implements InterfaceService<ServidorEfetivo,
                 .orElse(null);
     }
 
-    @Override
+   
     @Transactional(readOnly = true)
     public Page<ServidorEfetivoDto> findAll(Pageable pageable) {
         return repository.findAll(pageable)
                 .map(mapper::toDto);
     }
 
-    @Override
+   
     @Transactional
     public ServidorEfetivoDto update(Integer id, ServidorEfetivoForm form) {
         return repository.findById(id)
@@ -57,7 +55,7 @@ public class ServidorEfetivoService implements InterfaceService<ServidorEfetivo,
                 .orElse(null);
     }
 
-    @Override
+   
     @Transactional
     public void delete(Integer id) {
         repository.deleteById(id);

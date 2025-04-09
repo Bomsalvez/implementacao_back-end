@@ -1,6 +1,5 @@
-package dev.senzalla.implementacao_backend.service.unidade;
+package dev.senzalla.implementacao_backend.service;
 
-import dev.senzalla.implementacao_backend.core.contracts.InterfaceService;
 import dev.senzalla.implementacao_backend.model.unidade.entity.Unidade;
 import dev.senzalla.implementacao_backend.model.unidade.mapper.UnidadeMapper;
 import dev.senzalla.implementacao_backend.model.unidade.module.UnidadeDto;
@@ -12,16 +11,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
-public class UnidadeService implements InterfaceService<Unidade, UnidadeForm, UnidadeDto> {
+public class UnidadeService  {
 
     private final UnidadeRepository repository;
     private final UnidadeMapper mapper;
 
-    @Override
+   
     @Transactional
     public UnidadeDto create(UnidadeForm form) {
         Unidade entity = mapper.toEntity(form);
@@ -29,7 +26,7 @@ public class UnidadeService implements InterfaceService<Unidade, UnidadeForm, Un
         return mapper.toDto(entity);
     }
 
-    @Override
+   
     @Transactional(readOnly = true)
     public UnidadeDto findById(Integer id) {
         return repository.findById(id)
@@ -38,14 +35,14 @@ public class UnidadeService implements InterfaceService<Unidade, UnidadeForm, Un
     }
 
 
-    @Override
+   
     @Transactional(readOnly = true)
     public Page<UnidadeDto> findAll(Pageable pageable) {
         return repository.findAll(pageable)
                 .map(mapper::toDto);
     }
 
-    @Override
+   
     @Transactional
     public UnidadeDto update(Integer id, UnidadeForm form) {
         return repository.findById(id)
@@ -58,7 +55,7 @@ public class UnidadeService implements InterfaceService<Unidade, UnidadeForm, Un
                 .orElse(null);
     }
 
-    @Override
+   
     @Transactional
     public void delete(Integer id) {
         repository.deleteById(id);

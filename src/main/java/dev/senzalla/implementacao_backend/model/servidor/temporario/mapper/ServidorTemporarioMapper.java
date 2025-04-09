@@ -1,6 +1,5 @@
 package dev.senzalla.implementacao_backend.model.servidor.temporario.mapper;
 
-import dev.senzalla.implementacao_backend.core.contracts.InterfaceEntityMapper;
 import dev.senzalla.implementacao_backend.model.pessoa.entity.Pessoa;
 import dev.senzalla.implementacao_backend.model.pessoa.mapper.PessoaMapper;
 import dev.senzalla.implementacao_backend.model.servidor.temporario.entity.ServidorTemporario;
@@ -11,11 +10,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class ServidorTemporarioMapper implements InterfaceEntityMapper<ServidorTemporario, ServidorTemporarioForm, ServidorTemporarioDto> {
+public class ServidorTemporarioMapper  {
 
     private final PessoaMapper pessoaMapper;
 
-    @Override
+   
     public ServidorTemporario toEntity(ServidorTemporarioForm form) {
         if (form == null) {
             return null;
@@ -32,7 +31,7 @@ public class ServidorTemporarioMapper implements InterfaceEntityMapper<ServidorT
         return entity;
     }
 
-    @Override
+   
     public ServidorTemporarioDto toDto(ServidorTemporario entity) {
         if (entity == null) {
             return null;

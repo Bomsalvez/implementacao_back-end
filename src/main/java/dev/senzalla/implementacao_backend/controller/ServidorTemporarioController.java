@@ -2,15 +2,13 @@ package dev.senzalla.implementacao_backend.controller;
 
 import dev.senzalla.implementacao_backend.model.servidor.temporario.module.ServidorTemporarioDto;
 import dev.senzalla.implementacao_backend.model.servidor.temporario.module.ServidorTemporarioForm;
-import dev.senzalla.implementacao_backend.service.servidor.temporario.ServidorTemporarioService;
+import dev.senzalla.implementacao_backend.service.ServidorTemporarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/servidores/temporarios")

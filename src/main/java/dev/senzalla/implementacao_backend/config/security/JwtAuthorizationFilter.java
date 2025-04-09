@@ -1,4 +1,4 @@
-package dev.senzalla.implementacao_backend.core.security;
+package dev.senzalla.implementacao_backend.config.security;
 
 import dev.senzalla.implementacao_backend.service.jwt.JwtService;
 import jakarta.servlet.FilterChain;

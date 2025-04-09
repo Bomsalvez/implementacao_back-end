@@ -1,7 +1,5 @@
 package dev.senzalla.implementacao_backend.model.lotacao.mapper;
 
-import dev.senzalla.implementacao_backend.core.contracts.InterfaceCollectionMapper;
-import dev.senzalla.implementacao_backend.core.contracts.InterfaceEntityMapper;
 import dev.senzalla.implementacao_backend.model.lotacao.entity.Lotacao;
 import dev.senzalla.implementacao_backend.model.lotacao.module.LotacaoDto;
 import dev.senzalla.implementacao_backend.model.lotacao.module.LotacaoForm;
@@ -17,12 +15,11 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class LotacaoMapper implements InterfaceEntityMapper<Lotacao, LotacaoForm, LotacaoDto>, InterfaceCollectionMapper<Lotacao, LotacaoDto> {
+public class LotacaoMapper  {
     
     private final PessoaMapper pessoaMapper;
     private final UnidadeMapper unidadeMapper;
     
-    @Override
     public Lotacao toEntity(LotacaoForm form) {
         if (form == null) {
             return null;
@@ -38,7 +35,6 @@ public class LotacaoMapper implements InterfaceEntityMapper<Lotacao, LotacaoForm
         return lotacao;
     }
 
-    @Override
     public LotacaoDto toDto(Lotacao entity) {
         if (entity == null) {
             return null;
@@ -54,7 +50,7 @@ public class LotacaoMapper implements InterfaceEntityMapper<Lotacao, LotacaoForm
         );
     }
 
-    @Override
+   
     public Collection<LotacaoDto> toDto(Iterable<Lotacao> entities) {
         if (entities == null) {
             return Page.<LotacaoDto>empty().getContent();

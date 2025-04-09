@@ -1,10 +1,9 @@
-package dev.senzalla.implementacao_backend.service.auth;
+package dev.senzalla.implementacao_backend.service;
 
 import dev.senzalla.implementacao_backend.model.auth.LoginDTO;
 import dev.senzalla.implementacao_backend.model.auth.TokenDTO;
 import dev.senzalla.implementacao_backend.model.usuario.entity.Usuario;
 import dev.senzalla.implementacao_backend.service.jwt.JwtService;
-import dev.senzalla.implementacao_backend.service.usuario.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;

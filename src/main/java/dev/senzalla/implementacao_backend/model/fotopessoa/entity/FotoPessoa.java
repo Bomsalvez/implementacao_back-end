@@ -1,11 +1,18 @@
 package dev.senzalla.implementacao_backend.model.fotopessoa.entity;
 
+import java.time.LocalDate;
+
 import dev.senzalla.implementacao_backend.model.pessoa.entity.Pessoa;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDate;
 
 /**
  * Entidade que representa uma foto associada a uma pessoa

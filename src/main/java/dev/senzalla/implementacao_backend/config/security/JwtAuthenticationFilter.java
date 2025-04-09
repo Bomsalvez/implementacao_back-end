@@ -1,4 +1,4 @@
-package dev.senzalla.implementacao_backend.core.security;
+package dev.senzalla.implementacao_backend.config.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.senzalla.implementacao_backend.model.auth.LoginDTO;

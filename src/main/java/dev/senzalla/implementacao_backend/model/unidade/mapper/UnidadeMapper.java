@@ -1,7 +1,5 @@
 package dev.senzalla.implementacao_backend.model.unidade.mapper;
 
-import dev.senzalla.implementacao_backend.core.contracts.InterfaceCollectionMapper;
-import dev.senzalla.implementacao_backend.core.contracts.InterfaceEntityMapper;
 import dev.senzalla.implementacao_backend.model.endereco.mapper.EnderecoMapper;
 import dev.senzalla.implementacao_backend.model.unidade.entity.Unidade;
 import dev.senzalla.implementacao_backend.model.unidade.module.UnidadeDto;
@@ -15,10 +13,10 @@ import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
-public class UnidadeMapper implements InterfaceEntityMapper<Unidade, UnidadeForm, UnidadeDto> , InterfaceCollectionMapper<Unidade, UnidadeDto> {
+public class UnidadeMapper   {
     private final EnderecoMapper enderecoMapper;
 
-    @Override
+   
     public UnidadeDto toDto(Unidade unidade) {
         if (unidade == null) {
             return null;
@@ -38,7 +36,7 @@ public class UnidadeMapper implements InterfaceEntityMapper<Unidade, UnidadeForm
         );
     }
 
-    @Override
+   
     public Unidade toEntity(UnidadeForm dto) {
         if (dto == null) {
             return null;
@@ -53,7 +51,7 @@ public class UnidadeMapper implements InterfaceEntityMapper<Unidade, UnidadeForm
     }
 
 
-    @Override
+   
     public Collection<UnidadeDto> toDto(Iterable<Unidade> entities) {
         return List.of();
     }

@@ -1,6 +1,5 @@
-package dev.senzalla.implementacao_backend.model.pessoa.service;
+package dev.senzalla.implementacao_backend.service;
 
-import dev.senzalla.implementacao_backend.core.contracts.InterfaceService;
 import dev.senzalla.implementacao_backend.model.pessoa.entity.Pessoa;
 import dev.senzalla.implementacao_backend.model.pessoa.mapper.PessoaMapper;
 import dev.senzalla.implementacao_backend.model.pessoa.module.PessoaDto;
@@ -12,16 +11,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
-public class PessoaService implements InterfaceService<Pessoa, PessoaForm, PessoaDto> {
+public class PessoaService  {
 
     private final PessoaRepository repository;
     private final PessoaMapper mapper;
 
-    @Override
+   
     @Transactional
     public PessoaDto create(PessoaForm form) {
         Pessoa entity = mapper.toEntity(form);
@@ -29,7 +26,7 @@ public class PessoaService implements InterfaceService<Pessoa, PessoaForm, Pesso
         return mapper.toDto(entity);
     }
 
-    @Override
+   
     @Transactional(readOnly = true)
     public PessoaDto findById(Integer id) {
         return repository.findById(id)
@@ -38,14 +35,14 @@ public class PessoaService implements InterfaceService<Pessoa, PessoaForm, Pesso
     }
 
 
-    @Override
+   
     @Transactional(readOnly = true)
     public Page<PessoaDto> findAll(Pageable pageable) {
         return repository.findAll(pageable)
                 .map(mapper::toDto);
     }
 
-    @Override
+   
     @Transactional
     public PessoaDto update(Integer id, PessoaForm form) {
         return repository.findById(id)
@@ -58,7 +55,7 @@ public class PessoaService implements InterfaceService<Pessoa, PessoaForm, Pesso
                 .orElse(null);
     }
 
-    @Override
+   
     @Transactional
     public void delete(Integer id) {
         repository.deleteById(id);

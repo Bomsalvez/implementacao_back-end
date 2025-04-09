@@ -1,6 +1,5 @@
 package dev.senzalla.implementacao_backend.model.endereco.mapper;
 
-import dev.senzalla.implementacao_backend.core.contracts.InterfaceEntityMapper;
 import dev.senzalla.implementacao_backend.model.cidade.mapper.CidadeMapper;
 import dev.senzalla.implementacao_backend.model.endereco.entity.Endereco;
 import dev.senzalla.implementacao_backend.model.endereco.module.EnderecoDto;
@@ -10,11 +9,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class EnderecoMapper implements InterfaceEntityMapper<Endereco, EnderecoForm, EnderecoDto> {
+public class EnderecoMapper  {
 
     private final CidadeMapper cidadeMapper;
 
-    @Override
+   
     public Endereco toEntity(EnderecoForm form) {
         if (form == null) {
             return null;
@@ -30,7 +29,7 @@ public class EnderecoMapper implements InterfaceEntityMapper<Endereco, EnderecoF
         return entity;
     }
 
-    @Override
+   
     public EnderecoDto toDto(Endereco entity) {
         if (entity == null) {
             return null;

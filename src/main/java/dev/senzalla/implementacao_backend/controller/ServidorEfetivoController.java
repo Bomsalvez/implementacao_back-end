@@ -2,7 +2,7 @@ package dev.senzalla.implementacao_backend.controller;
 
 import dev.senzalla.implementacao_backend.model.servidor.efetivo.module.ServidorEfetivoDto;
 import dev.senzalla.implementacao_backend.model.servidor.efetivo.module.ServidorEfetivoForm;
-import dev.senzalla.implementacao_backend.service.servidor.efetivo.ServidorEfetivoService;
+import dev.senzalla.implementacao_backend.service.ServidorEfetivoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

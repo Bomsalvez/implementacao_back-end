@@ -1,4 +1,4 @@
-package dev.senzalla.implementacao_backend.core.exception;
+package dev.senzalla.implementacao_backend.config.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

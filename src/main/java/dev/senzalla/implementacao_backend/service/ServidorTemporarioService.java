@@ -1,7 +1,5 @@
-package dev.senzalla.implementacao_backend.service.servidor.temporario;
+package dev.senzalla.implementacao_backend.service;
 
-import dev.senzalla.implementacao_backend.core.contracts.InterfaceService;
-import dev.senzalla.implementacao_backend.model.pessoa.service.PessoaService;
 import dev.senzalla.implementacao_backend.model.servidor.temporario.entity.ServidorTemporario;
 import dev.senzalla.implementacao_backend.model.servidor.temporario.mapper.ServidorTemporarioMapper;
 import dev.senzalla.implementacao_backend.model.servidor.temporario.module.ServidorTemporarioDto;
@@ -13,17 +11,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
-public class ServidorTemporarioService implements InterfaceService<ServidorTemporario, ServidorTemporarioForm, ServidorTemporarioDto> {
+public class ServidorTemporarioService  {
 
     private final ServidorTemporarioRepository repository;
     private final ServidorTemporarioMapper mapper;
     private final PessoaService pessoaService;
 
-    @Override
+   
     @Transactional
     public ServidorTemporarioDto create(ServidorTemporarioForm form) {
         ServidorTemporario entity = mapper.toEntity(form);
@@ -31,7 +27,7 @@ public class ServidorTemporarioService implements InterfaceService<ServidorTempo
         return mapper.toDto(entity);
     }
 
-    @Override
+   
     @Transactional(readOnly = true)
     public ServidorTemporarioDto findById(Integer id) {
         return repository.findById(id)
@@ -40,14 +36,14 @@ public class ServidorTemporarioService implements InterfaceService<ServidorTempo
     }
 
 
-    @Override
+   
     @Transactional(readOnly = true)
     public Page<ServidorTemporarioDto> findAll(Pageable pageable) {
         return repository.findAll(pageable)
                 .map(mapper::toDto);
     }
 
-    @Override
+   
     @Transactional
     public ServidorTemporarioDto update(Integer id, ServidorTemporarioForm form) {
         return repository.findById(id)
@@ -60,7 +56,7 @@ public class ServidorTemporarioService implements InterfaceService<ServidorTempo
                 .orElse(null);
     }
 
-    @Override
+   
     @Transactional
     public void delete(Integer id) {
         repository.deleteById(id);

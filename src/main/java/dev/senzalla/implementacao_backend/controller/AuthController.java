@@ -2,7 +2,7 @@ package dev.senzalla.implementacao_backend.controller;
 
 import dev.senzalla.implementacao_backend.model.auth.LoginDTO;
 import dev.senzalla.implementacao_backend.model.auth.TokenDTO;
-import dev.senzalla.implementacao_backend.service.auth.AuthService;
+import dev.senzalla.implementacao_backend.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
